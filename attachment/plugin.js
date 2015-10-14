@@ -2,7 +2,7 @@
  *plugins.js
  *
  *Released under MIT License.
- *Copyright (c) 2014-2015 www.friendsbt.com.All rights reserved
+ *Copyright (c) 2014-2015 www.friendsbt.com. All rights reserved.
  *
  */
 tinymce.PluginManager.add('attachment', function(editor, url) {
@@ -24,7 +24,6 @@ tinymce.PluginManager.add('attachment', function(editor, url) {
   });
 
   editor.addMenuItem('attachment', {
-      icon: 'code',
       image: url + '/images/icon-paperclip.png',
       text: 'Add Attachment',
       context: 'tools',

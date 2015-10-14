@@ -2,7 +2,7 @@
  *plugins.js
  *
  *Released under MIT License.
- *Copyright (c) 2014-2015 www.friendsbt.com.All rights reserved
+ *Copyright (c) 2014-2015 www.friendsbt.com. All rights reserved.
  *
  */
 tinymce.PluginManager.add('attachment', function(editor, url) {
@@ -18,15 +18,16 @@ tinymce.PluginManager.add('attachment', function(editor, url) {
   editor.addCommand("mceAttachmentEditor", showDialog);
 
   editor.addButton('attachment', {
-    image: url + '/icon_attachment.png',
+    image: url + '/images/icon-paperclip.png',
     tooltip: 'Add Attachment',
     onclick: showDialog
   });
 
-  //editor.addMenuItem('attachment', {
-  //    icon: 'code',
-  //    text: 'Source code',
-  //    context: 'tools',
-  //    onclick: showDialog
-  //});
+  editor.addMenuItem('attachment', {
+      icon: 'code',
+      image: url + '/images/icon-paperclip.png',
+      text: 'Add Attachment',
+      context: 'tools',
+      onclick: showDialog
+  });
 });
