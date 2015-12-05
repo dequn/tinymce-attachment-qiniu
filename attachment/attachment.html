@@ -5,12 +5,15 @@
   <meta charset="UTF-8">
   <title>上传附件</title>
 
-  <script type="text/javascript" src="./js/jquery-2.0.3.min.js"></script>
-  <script type="text/javascript" src="./js/angular.min.js"></script>
-  <script type="text/javascript" src="./js/plupload.full.min.js"></script>
-  <script type="text/javascript" src="./js/qiniu.min.js"></script>
-  <script type="text/javascript" src="./js/attachmentUploadApp.js"></script>
+  <!--<script type="text/javascript" src="./js/jquery-2.0.3.min.js"></script>-->
+  <!--<script type="text/javascript" src="./js/angular.min.js"></script>-->
+  <!--<script type="text/javascript" src="./js/plupload.full.min.js"></script>-->
+  <!--<script type="text/javascript" src="./js/qiniu.min.js"></script>-->
 
+  <script type="text/javascript" src="//test.friendsbt.com/statics/js/angular.min.js"></script>
+  <script type="text/javascript" src="//test.friendsbt.com/statics/js/plupload.full.min.js"></script>
+  <script type="text/javascript" src="//test.friendsbt.com/statics/js/qiniu.min.js"></script>
+  <script type="text/javascript" src="./js/attachmentUploadApp.js"></script>
   <link rel="stylesheet" href="attachment.css" type="text/css" />
 
 </head>
@@ -48,7 +51,7 @@
               </div>
             </div>
             <ul class="filelist" ng-show="!isFileListEmpty">
-              <li ng-repeat="file in fileList track by $index">
+              <li ng-repeat="file in fileList track by $index" ng-mouseenter="mouseEnterFile(file)" ng-mouseleave="mouseLeaveFile(file)">
                 <p class="title" ng-bind="file.name">package.json</p>
                 <p class="imgWrap notimage">
                   <i class="file-preview {{getBgImage(file)}}"></i>
@@ -56,7 +59,7 @@
                 </p>
                 <p class="progress"><span></span>
                 </p>
-                <div class="file-panel" ng-show="" style="height: 30px;">
+                <div class="file-panel" ng-show="file.panel" style="height: 30px;">
                   <span class="cancel" ng-click="removeFile(file)">删除</span>
                   <!--<span class="rotateRight">向右旋转</span>-->
                   <!--<span class="rotateLeft">向左旋转</span>-->

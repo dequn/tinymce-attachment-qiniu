@@ -18,8 +18,8 @@ app.controller('uploadAttachmentController', ['$scope',
 
     $scope.addFile = function(file) {
       $scope.fileList.push(file);
-      $scope.$apply();
       $scope.doAfterFileListChange();
+      $scope.$apply();
     };
 
     $scope.removeFile = function(file) {
@@ -31,17 +31,18 @@ app.controller('uploadAttachmentController', ['$scope',
       }
       $scope.uploader.removeFile(file);
       $scope.doAfterFileListChange();
+      //$scope.$apply();
     };
 
     $scope.doAfterFileListChange = function() {
       var fileLength = $scope.fileList.length;
       $scope.isFileListEmpty = fileLength === 0 ? true : false;
       $scope.pickFileBtnText = fileLength === 0 ? '选择文件' : '继续添加';
-      $scope.$apply();
+      //$scope.$apply();
     };
 
 
-
+    //获取背景图片
     $scope.getBgImage = function(file) {
       var full_file_name = file.name;
       var pointIndex = full_file_name.lastIndexOf(".");
@@ -70,22 +71,23 @@ app.controller('uploadAttachmentController', ['$scope',
     $scope.insertContent = function() {
       var st = $scope.uploader.state;
       if (st === plupload.UPLOADING) {
-        $scope.stateInfo = '正在上传，不能插入';
+        alert('正在上传，不能插入');
         return;
       }
       if ($scope.uploader.total.uploaded < $scope.fileList.length) {
-        $scope.stateInfo = '请删除不能上传的文件或重新上传';
+        alert('请删除不能上传的文件或重新上传');
         return;
       }
       var editor = top.tinymce.activeEditor;
       var length = $scope.uploader.files.length;
       for (var i = 0; i < length; i++) {
         var file = $scope.uploader.files[i];
-        var content = '<a href="' + file.download_link + '">' + file.name + '</a><br />';
+        var content = '<p>附件:<a target="_blank" href="/resource/download?download_link=' + file.download_link + '">' + file.name + '</a></p>';
         editor.insertContent(content);
       }
       editor.windowManager.close();
     };
+
     $scope.getSummaryStatus = function() {
       if ($scope.uploader.state == plupload.STOPPED) {
         if ($scope.uploader.files.length > 0) {
@@ -103,6 +105,9 @@ app.controller('uploadAttachmentController', ['$scope',
         var length = $scope.uploader.files.length;
         uploaded = uploaded > length ? length : uploaded;
         return '正在上传:' + uploaded + '/' + length;
+      } else {
+
+        return '处理完毕';
       }
     };
 
@@ -138,12 +143,12 @@ app.controller('uploadAttachmentController', ['$scope',
 
         'FilesAdded': function(up, files) {
           plupload.each(files, function(file) {
+              file.panel = false;
             $scope.addFile(file);
           });
 
         },
         'UploadProgress': function(up, file) {
-
         },
         'FileUploaded': function(up, file, info) {
 
@@ -155,6 +160,10 @@ app.controller('uploadAttachmentController', ['$scope',
           $scope.getSummaryStatus();
 
         },
+        'StateChanged':function(up){
+            $scope.getSummaryStatus();
+        },
+
         'Error': function(up, err, errTip) {
           //上传出错时,处理相关的事情
           if (up.state == plupload.QUEUED) {
@@ -188,6 +197,12 @@ app.controller('uploadAttachmentController', ['$scope',
       $scope.uploader.start();
     };
 
-
+    $scope.mouseEnterFile = function(file){
+        file.panel = true;
+    };
+    
+    $scope.mouseLeaveFile = function(file){
+        file.panel = false;
+    };
   }
 ]);

@@ -19,14 +19,14 @@ tinymce.PluginManager.add('attachment', function(editor, url) {
 
   editor.addButton('attachment', {
     image: url + '/images/icon-paperclip.png',
-    tooltip: 'Add Attachment',
+    tooltip: 'Add attachment',
     onclick: showDialog
   });
 
   editor.addMenuItem('attachment', {
       image: url + '/images/icon-paperclip.png',
-      text: 'Add Attachment',
-      context: 'tools',
+      text: 'Add attachment',
+      context: 'insert',
       onclick: showDialog
   });
 });
