@@ -19,3 +19,5 @@
 ## 配置
 attachment/js/attachmentUploadApp.js文件中按七牛官方文档说明配置uploader 
 ##编辑器工具条中看到‘回形针’图标即为配置成功。
+
+# 如果需要轻量级配置，请切换到simple-mode分支。
